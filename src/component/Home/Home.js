@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Posts from '../Posts/Posts';
+import Swal from 'sweetalert2';
 
 const Home = () => {
 
@@ -18,6 +19,16 @@ const Home = () => {
         setTitle("");
         setUserID("");
         setPost("");
+        Swal.fire({
+            title: 'Successfully Added Post!!',
+            text: 'Continue Browsing Posts...',
+            icon: 'success',
+            confirmButtonText: 'Cool',
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: 'alert-btn'
+            }
+        });
         window.location.reload();
       };
       
@@ -66,7 +77,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className='relative'>
                     <Posts></Posts>
                 </div>
             </div>

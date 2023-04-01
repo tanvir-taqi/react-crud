@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SinglePost from '../SinglePost/SinglePost';
+import Swal from 'sweetalert2';
 
 const Posts = () => {
     const [posts, setPosts] = useState([])
@@ -40,16 +41,39 @@ const Posts = () => {
             posts[index].body = content;
             localStorage.setItem('postData', JSON.stringify(posts));
             setLoadingUpdate(false)
+            Swal.fire({
+                title: 'Successfully Updated Post!',
+                text: 'Continue Browsing Posts...',
+                icon: 'success',
+                confirmButtonText: 'Cool',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'alert-btn'
+                }
+            });
             window.location.reload()
         }
     }
 
+
+    // handle delete data from local storage
     const handleDelete = (id) => {
         
         const posts = JSON.parse(localStorage.getItem('postData')) || [];
         const filteredPosts = posts.filter(post => post.id !== id);
         localStorage.setItem('postData', JSON.stringify(filteredPosts));
         setPosts(filteredPosts);
+        Swal.fire({
+            title: 'Deleted!',
+            text: 'Continue Browsing Posts...',
+            icon: 'success',
+            confirmButtonText: 'Cool',
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: 'alert-btn'
+            }
+          });
+          
     }
 
     if (loadingUpdate) {
